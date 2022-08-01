@@ -11,6 +11,7 @@ class bubble {
         this.y          = y;
         this.radius     = 0;
         this.max_radius = max_radius;
+        this.color = '#' + generate_random_letter(3);
     }
     bubble_draw() {
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
@@ -18,10 +19,18 @@ class bubble {
     }
     bubble_main() {
         ctx.beginPath();
-        ctx.fillStyle = '#fff' + Math.round(((this.max_radius - this.radius) / this.max_radius * 15)).toString(16);
+        ctx.fillStyle = this.color + Math.round(((this.max_radius - this.radius) / this.max_radius * 15)).toString(16);
         this.bubble_draw();
         this.radius += 1;
     }
+}
+
+function generate_random_letter(num) {
+    var str = '';
+    for(var i = 0; i < num; i++) {
+        str += Math.round(Math.random() * 15).toString(16);
+    }
+    return str;
 }
 
 function generate_bubble() {
@@ -29,7 +38,7 @@ function generate_bubble() {
 }
 
 function start() {
-    for(var i = 0; i < Math.round(Math.random() * 10); i++) {
+    for(var i = 0; i < Math.round(Math.random() * 10 + 5); i++) {
         generate_bubble();
     }
 }
